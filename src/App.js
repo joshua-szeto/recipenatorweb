@@ -1,6 +1,7 @@
 import React, { useState } from 'react'; // Import useState hook
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
 
@@ -16,6 +17,13 @@ function App() {
   // Function to save the input value
   const handleSaveClick = () => {
     setSavedValue(inputValue); // Save the current input value
+    
+    const baseUrl = process.env.REACT_APP_RECIPINATOR_BACKEND_SERVICE;
+    console.log(`calling ${baseUrl}`)
+    axios.get(`${baseUrl}/generate-recipe/${inputValue}`).then(response=>{
+      console.log(response);
+    });
+    
     console.log(`Saved value: ${inputValue}`); // Print the saved value to the console
 
   };
